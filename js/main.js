@@ -85,8 +85,10 @@ async function loadFFmpeg() {
             }
         });
 
-        const baseURL = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd';
-        
+        // ✅ FIX: Usar unpkg en lugar de jsDelivr para los archivos core
+        // unpkg sirve los headers CORS correctos que jsDelivr bloquea para Workers
+        const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+
         await ffmpeg.load({
             coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
             wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
@@ -94,7 +96,7 @@ async function loadFFmpeg() {
 
         loaded = true;
     } catch (e) {
-        showError('Error cargando el motor: ' + e.message + '. Asegúrate de tener conexión a internet.');
+        showError('Error cargando el motor: ' + e.message);
     } finally {
         overlay.classList.remove('show');
     }
@@ -328,7 +330,5 @@ function resetAll() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initDragAndDrop();
-    
-    // Inicializar calidad
     updateQuality(document.getElementById('qualitySlider').value);
 });
