@@ -1,10 +1,12 @@
-HTML:
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VideoPress — Compresor de Video</title>
+
+    <!-- ✅ CRÍTICO: debe ser el PRIMER script, antes de todo -->
+    <script src="coi-serviceworker.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -267,17 +269,7 @@ HTML:
     <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>
     
-    <script src="js/main.js"></script>
-
-    <script src="coi-serviceworker.js"></script>
-
-    <script>
-        // Esto fuerza la recarga con las cabeceras correctas la primera vez
-        if (!window.crossOriginIsolated) {
-            console.log("Activando Cross-Origin Isolation...");
-        }
-    </script>
-
+    <!-- ✅ main.js solo UNA vez, al final -->
     <script src="js/main.js"></script>
 </body>
 </html>
