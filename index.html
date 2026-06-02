@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VideoPress — Compresor de Video</title>
 
-    <!-- ✅ CRÍTICO: debe ser el PRIMER script, antes de todo -->
+    <!-- CRÍTICO: primer script, antes de todo -->
     <script src="coi-serviceworker.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Init overlay -->
     <div id="initOverlay">
         <div class="spinner"></div>
         <div class="init-msg">Cargando motor de compresión…</div>
@@ -39,10 +37,8 @@
             <p>Compresión inteligente directamente en tu dispositivo. Sin servidores, sin límites, sin marcas de agua.</p>
         </div>
 
-        <!-- Error box -->
         <div id="errorBox"></div>
 
-        <!-- Drop zone -->
         <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
             <div class="dz-icon">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +58,6 @@
 
         <input type="file" id="fileInput" accept="video/*">
 
-        <!-- Preview & Settings -->
         <div id="previewSection">
             <div class="preview-card">
                 <div class="preview-top">
@@ -77,16 +72,11 @@
                     </div>
                     <button class="remove-btn" onclick="resetAll()" title="Quitar">✕</button>
                 </div>
-
                 <div class="settings-grid">
                     <div class="setting-group">
-                        <label class="setting-label">
-                            Calidad
-                            <span id="qualityVal">Alta</span>
-                        </label>
+                        <label class="setting-label">Calidad <span id="qualityVal">Alta</span></label>
                         <input type="range" id="qualitySlider" min="1" max="3" value="2" step="1" oninput="updateQuality(this.value)">
                     </div>
-
                     <div class="setting-group">
                         <label class="setting-label">Resolución</label>
                         <select id="resSelect">
@@ -97,7 +87,6 @@
                             <option value="640x360">360p</option>
                         </select>
                     </div>
-
                     <div class="setting-group">
                         <label class="setting-label">Formato de salida</label>
                         <select id="formatSelect">
@@ -105,7 +94,6 @@
                             <option value="webm">WebM (VP9)</option>
                         </select>
                     </div>
-
                     <div class="setting-group">
                         <label class="setting-label">FPS</label>
                         <select id="fpsSelect">
@@ -115,7 +103,6 @@
                             <option value="24">24 fps</option>
                         </select>
                     </div>
-
                     <div class="setting-group full">
                         <label class="setting-label">Velocidad de bits de audio</label>
                         <select id="audioBitrate">
@@ -126,7 +113,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="stats-row">
                     <div class="stat-box">
                         <div class="stat-val" id="origSize">—</div>
@@ -141,7 +127,6 @@
                         <div class="stat-lbl">Reducción est.</div>
                     </div>
                 </div>
-
                 <div class="compress-wrap">
                     <button class="compress-btn" id="compressBtn" onclick="startCompress()">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -153,7 +138,6 @@
             </div>
         </div>
 
-        <!-- Progress -->
         <div id="progressSection">
             <div class="progress-card">
                 <div class="progress-title pulsing" id="progressTitle">Procesando video…</div>
@@ -165,7 +149,6 @@
             </div>
         </div>
 
-        <!-- Result -->
         <div id="resultSection">
             <div class="result-card">
                 <div class="result-top">
@@ -179,7 +162,6 @@
                         <div class="result-sub" id="resultSub">Tu video está listo para descargar</div>
                     </div>
                 </div>
-
                 <div class="result-stats">
                     <div class="r-stat">
                         <div class="r-stat-val" id="rOrigSize">—</div>
@@ -194,7 +176,6 @@
                         <div class="r-stat-lbl">Ahorrado</div>
                     </div>
                 </div>
-
                 <div class="result-actions">
                     <a id="downloadLink" class="dl-btn">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -212,51 +193,22 @@
             </div>
         </div>
 
-        <!-- Features -->
         <div class="features">
             <div class="feature">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
-                </div>
-                <div class="feature-text">
-                    <h3>100% privado</h3>
-                    <p>Tu video nunca sale de tu dispositivo. Todo en el navegador.</p>
-                </div>
+                <div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+                <div class="feature-text"><h3>100% privado</h3><p>Tu video nunca sale de tu dispositivo. Todo en el navegador.</p></div>
             </div>
             <div class="feature">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                </div>
-                <div class="feature-text">
-                    <h3>Sin límites</h3>
-                    <p>Comprime cuantos videos quieras, del tamaño que sean.</p>
-                </div>
+                <div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                <div class="feature-text"><h3>Sin límites</h3><p>Comprime cuantos videos quieras, del tamaño que sean.</p></div>
             </div>
             <div class="feature">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                    </svg>
-                </div>
-                <div class="feature-text">
-                    <h3>Alta calidad</h3>
-                    <p>Algoritmos H.264/VP9 para máxima compresión con mínima pérdida.</p>
-                </div>
+                <div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
+                <div class="feature-text"><h3>Alta calidad</h3><p>Algoritmos H.264/VP9 para máxima compresión con mínima pérdida.</p></div>
             </div>
             <div class="feature">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                    </svg>
-                </div>
-                <div class="feature-text">
-                    <h3>Móvil y escritorio</h3>
-                    <p>Funciona perfecto en cualquier dispositivo y tamaño de pantalla.</p>
-                </div>
+                <div class="feature-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+                <div class="feature-text"><h3>Móvil y escritorio</h3><p>Funciona perfecto en cualquier dispositivo y tamaño de pantalla.</p></div>
             </div>
         </div>
 
@@ -265,11 +217,14 @@
         </footer>
     </div>
 
-    <!-- FFmpeg Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>
-    
-    <!-- ✅ main.js solo UNA vez, al final -->
+    <!--
+        USA @ffmpeg/ffmpeg@0.12.6 desde unpkg (NO 0.12.10 desde jsDelivr).
+        0.12.10 genera un chunk "814.ffmpeg.js" que se carga como Worker
+        desde jsDelivr y es bloqueado por CORS en GitHub Pages.
+        0.12.6 desde unpkg no tiene ese problema.
+    -->
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script>
+    <script src="https://unpkg.com/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
